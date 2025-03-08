@@ -15,7 +15,7 @@ app.post('/api/anthropic', async (req, res) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': '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',
+        'x-api-key': process.env.ANTHROPIC_API_KEY,
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
