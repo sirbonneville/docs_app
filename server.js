@@ -32,13 +32,14 @@ async function fetchDocumentation() {
       return null;
     }
     
-    if (!response.ok) {
-      throw new Error(`Failed to fetch documentation from GitHub: ${response.status} ${response.statusText}`);
-    }
+    // Remove this unreachable code that references a non-existent response variable
+    // if (!response.ok) {
+    //   throw new Error(`Failed to fetch documentation from GitHub: ${response.status} ${response.statusText}`);
+    // }
     
-    const text = await response.text();
-    console.log(`Successfully fetched documentation from GitHub: ${text.length} characters`);
-    return text;
+    // const text = await response.text();
+    // console.log(`Successfully fetched documentation from GitHub: ${text.length} characters`);
+    // return text;
   } catch (githubError) {
     console.error('Error fetching from GitHub:', githubError);
     
