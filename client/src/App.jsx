@@ -24,7 +24,8 @@ function App() {
 
     try {
       // Updated to use the correct endpoint
-      const response = await fetch('http://localhost:3001/api/anthropic', {
+      // Find the fetch call in your handleSubmit function and update it:
+      const response = await fetch('http://localhost:3002/api/anthropic', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

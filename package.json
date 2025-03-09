@@ -25,13 +25,16 @@
   "dependencies": {
     "@anthropic-ai/sdk": "^0.6.0",
     "@supabase/supabase-js": "^2.21.0",
+    "compromise": "^14.14.4",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "helmet": "^6.0.1",
     "marked": "^15.0.7",
     "morgan": "^1.10.0",
+    "natural": "^8.0.1",
     "node-fetch": "^3.3.2",
+    "tiktoken": "^1.0.20",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
