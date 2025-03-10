@@ -27,7 +27,6 @@ function App() {
     try {
       console.log('Sending request with input:', inputValue);
       
-      // Update the port to match your server
       const response = await fetch('http://localhost:3001/api/anthropic', {
         method: 'POST',
         headers: {
@@ -35,7 +34,7 @@ function App() {
         },
         body: JSON.stringify({
           model: "claude-3-5-haiku-20241022",
-          max_tokens: 8000, // Increased from 4000 to allow for longer responses
+          max_tokens: 8000, // Increased from 4000
           messages: [
             {
               role: "user",
@@ -55,16 +54,18 @@ function App() {
       const data = JSON.parse(responseText);
       console.log('Successfully parsed response:', data);
       
+      // Fix: Use the correct property from the Anthropic API response
       const assistantMessage = {
         role: 'assistant',
-        content: data.content[0].text
+        // Try different possible response formats from the API
+        content: data.completion || 
+                 (data.content && data.content[0] && data.content[0].text) || 
+                 data.text || 
+                 JSON.stringify(data)
       };
-      console.log('Created assistant message:', assistantMessage);
+      console.log('Created assistant message with content:', assistantMessage.content);
       
-      setMessages(prev => {
-        console.log('Adding assistant message to:', prev);
-        return [...prev, assistantMessage];
-      });
+      setMessages(prev => [...prev, assistantMessage]);
       
     } catch (err) {
       // More detailed error logging

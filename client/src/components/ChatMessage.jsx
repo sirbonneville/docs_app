@@ -12,6 +12,11 @@ import 'prismjs/components/prism-bash';
 import './ChatMessage.css';
 
 function ChatMessage({ message, isUser, tokenUsage }) {
+  useEffect(() => {
+    console.log('ChatMessage received:', { message, isUser });
+    Prism.highlightAll();
+  }, [message, isUser]);
+
   const contentRef = useRef(null);
 
   useEffect(() => {
