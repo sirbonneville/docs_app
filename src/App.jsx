@@ -34,7 +34,7 @@ function App() {
         },
         body: JSON.stringify({
           model: "claude-3-5-haiku-20241022",
-          max_tokens: 8000, // Increased from 4000
+          max_tokens: 8000,
           messages: [
             {
               role: "user",
@@ -54,16 +54,32 @@ function App() {
       const data = JSON.parse(responseText);
       console.log('Successfully parsed response:', data);
       
-      // Fix: Use the correct property from the Anthropic API response
+      // Extract content based on the current Anthropic API format
+      let assistantContent = '';
+      
+      // Handle the new format (content array with type/text objects)
+      if (data.content && Array.isArray(data.content)) {
+        assistantContent = data.content
+          .filter(item => item.type === 'text')
+          .map(item => item.text)
+          .join('\n');
+      } 
+      // Handle legacy format with completion field
+      else if (data.completion) {
+        assistantContent = data.completion;
+      }
+      // Last resort - stringify the whole response
+      else {
+        console.warn('Unexpected response format:', data);
+        assistantContent = JSON.stringify(data);
+      }
+      
+      console.log('Extracted assistant content:', assistantContent);
+      
       const assistantMessage = {
         role: 'assistant',
-        // Try different possible response formats from the API
-        content: data.completion || 
-                 (data.content && data.content[0] && data.content[0].text) || 
-                 data.text || 
-                 JSON.stringify(data)
+        content: assistantContent
       };
-      console.log('Created assistant message with content:', assistantMessage.content);
       
       setMessages(prev => [...prev, assistantMessage]);
       
