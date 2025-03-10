@@ -17,7 +17,13 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-app.use(cors());
+// Near the top of your server.js file, after the imports
+// Make sure CORS is properly configured
+app.use(cors({
+  origin: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175'],
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 
 // Function to fetch documentation from GitHub with local file fallback
@@ -144,7 +150,7 @@ app.post('/api/anthropic', async (req, res) => {
     // Update the request body with system prompt
     const requestBody = {
       ...req.body,
-      model: "claude-3-5-haiku-20241022",
+      model: "claude-3-5-haiku-20241022", // Updated model version
       system: systemPrompt,
       max_tokens: 8000,
       messages: messagesWithContext
