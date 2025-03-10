@@ -52,7 +52,7 @@ app.post('/api/anthropic', async (req, res) => {
       },
       body: JSON.stringify({
         model: req.body.model || 'claude-3-haiku-20240307',
-        max_tokens: req.body.max_tokens || 4000,
+        max_tokens: req.body.max_tokens || 8000, // Increased from 4000
         messages: req.body.messages
       }),
     });

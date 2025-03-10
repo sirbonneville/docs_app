@@ -22,7 +22,7 @@ function ChatMessage({ message, isUser, tokenUsage }) {
   }, [message]);
 
   // Define the markdown renderer component to avoid code duplication
-  const MarkdownRenderer = ({ content }) => (
+  const MarkdownRenderer = ({ content, isUserContent }) => (
     <ReactMarkdown
       remarkPlugins={[remarkGfm, remarkBreaks]}
       rehypePlugins={[rehypeRaw, rehypeSanitize]}
@@ -30,6 +30,7 @@ function ChatMessage({ message, isUser, tokenUsage }) {
         h1: ({node, ...props}) => <h1 className="markdown-h1" {...props} />,
         h2: ({node, ...props}) => <h2 className="markdown-h2" {...props} />,
         h3: ({node, ...props}) => <h3 className="markdown-h3" {...props} />,
+        p: ({node, ...props}) => <p className="markdown-paragraph" {...props} />,
         ul: ({node, ...props}) => <ul className="markdown-list" {...props} />,
         li: ({node, ...props}) => <li className="markdown-list-item" {...props} />,
         code: ({node, inline, className, children, ...props}) => {
@@ -52,11 +53,11 @@ function ChatMessage({ message, isUser, tokenUsage }) {
     <div className={`message ${isUser ? 'user-message' : 'assistant-message'}`} ref={contentRef}>
       {isUser ? (
         <div className="user-content">
-          <MarkdownRenderer content={message} />
+          <MarkdownRenderer content={message} isUserContent={true} />
         </div>
       ) : (
         <div className="markdown-content">
-          <MarkdownRenderer content={message} />
+          <MarkdownRenderer content={message} isUserContent={false} />
         </div>
       )}
     </div>
