@@ -77,7 +77,8 @@ body {
   font-weight: 600;
 }
 
-.message {
+/* Remove conflicting message styles that might override ChatMessage.css */
+/* .message {
   max-width: 80%;
   padding: 0.8rem 1rem;
   border-radius: 18px;
@@ -97,7 +98,7 @@ body {
   background-color: #f0f4f8;
   color: var(--text-color);
   border-bottom-left-radius: 4px;
-}
+} */
 
 .message-content {
   font-size: 1rem;

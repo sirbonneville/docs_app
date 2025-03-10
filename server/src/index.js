@@ -19,7 +19,7 @@ const __dirname = path.dirname(__filename);
 
 // Initialize express app
 const app = express();
-const PORT = process.env.PORT || 3002; // Changed from 3001 to 3002
+const PORT = process.env.PORT || 3001;
 
 // Apply middleware
 app.use(helmet({
