@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import ChatMessage from './ChatMessage';
 
+// Add this CSS to your App.css or create it if it doesn't exist
+// Then import it at the top of App.jsx
+import './App.css';
+
 function App() {
   const [inputValue, setInputValue] = useState('');
   const [messages, setMessages] = useState([]);  // Add this state for message history
